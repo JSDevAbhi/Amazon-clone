@@ -656,5 +656,37 @@ const products = [
       "apparel",
       "mens"
     ]
+  },
+  {
+    id: "bc2847e9-5323-403f-b7cf-57fde044a955-id1",
+    image: "images/products/umbrella.jpg",
+    name: "Plain Black Umbrella",
+    rating: {
+      stars: 4.0,
+      count: 1057
+    },
+    priceCents: 400,
+    keywords: [
+      "essentials",
+      "common",
+      "household",
+      "rain"
+    ]
+  },
+  {
+    id: "bc2847e9-5323-403f-b7cf-57fde044a955-id2",
+    image: "images/products/backpack.jpg",
+    name: "Black backPack with net sleeves",
+    rating: {
+      stars: 3.5,
+      count: 57
+    },
+    priceCents: 999,
+    keywords: [
+      "essentials",
+      "common",
+      "wearables",
+      "sudy"
+    ]
   }
 ];
