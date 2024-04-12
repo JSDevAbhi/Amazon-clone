@@ -1,11 +1,10 @@
-import { cart } from "../data/cart.js";
-import {products} from "../data/products.js";
+import { cart, addToCart} from "../data/cart.js";
+import { products } from "../data/products.js";
 
-let productsHTML = '';  // accumulator method 
-
+let productsHTML = ""; // accumulator method
 
 products.forEach((product) => {
-    productsHTML += `<div class="product-container">
+  productsHTML += `<div class="product-container">
     <div class="product-image-container">
       <img class="product-image"
         src="${product.image}">
@@ -24,7 +23,7 @@ products.forEach((product) => {
     </div>
 
     <div class="product-price">
-      $${(product.priceCents/100).toFixed(2)}
+      $${(product.priceCents / 100).toFixed(2)}
     </div>
 
     <div class="product-quantity-container">
@@ -49,48 +48,41 @@ products.forEach((product) => {
       Added
     </div>
 
-    <button class="add-to-cart-button button-primary js-add-to-cart-button" data-product-id="${product.id}">
+    <button class="add-to-cart-button button-primary js-add-to-cart-button" data-product-id="${
+      product.id
+    }">
       Add to Cart
     </button>
   </div>
      `;
-})
+});
 
-document.querySelector('.js-products-grid').innerHTML = productsHTML;
+function updateCartQuantity() {
+  let cartQuantiy = 0;
 
-document.querySelectorAll('.js-add-to-cart-button').forEach((AddToCartBtn)=>{
-  AddToCartBtn.addEventListener('click', ()=>{
-    const {productId} = AddToCartBtn.dataset;
-    const productQuantity = Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
-    const addedToCartmsgEL = document.querySelector(`.js-added-to-cart-${productId}`);
-    addedToCartmsgEL.classList.add('visible');
-    const msgId = setTimeout(() =>{
-      addedToCartmsgEL.classList.remove('visible');
-    },  2000);
-    
-    let matchingProduct;
-    // checking if product already exists in cart 
-    cart.forEach((cartItem)=>{
-      if(cartItem.productId === productId){
-        matchingProduct = cartItem;
-      }
-    })
+  cart.forEach((cartItem) => {
+    cartQuantiy += cartItem.productQuantity;
+  });
+  document.querySelector(".js-cart-quantity").innerHTML = cartQuantiy;
+}
 
-    if(matchingProduct){
-      matchingProduct.productQuantity += productQuantity;
-    }else{
-       cart.push({
-        productId,
-        productQuantity,
-      });
-    }
-    
-    let cartQuantiy = 0;
+document.querySelector(".js-products-grid").innerHTML = productsHTML;
 
-    cart.forEach((cartItem)=>{
-      cartQuantiy += cartItem.productQuantity;
-    })
-    
-    document.querySelector('.js-cart-quantity').innerHTML = cartQuantiy;
-  })
-})
+document.querySelectorAll(".js-add-to-cart-button").forEach((AddToCartBtn) => {
+  AddToCartBtn.addEventListener("click", () => {
+    const { productId } = AddToCartBtn.dataset;
+    const productQuantity = Number(
+      document.querySelector(`.js-quantity-selector-${productId}`).value
+    );
+    const addedToCartmsgEL = document.querySelector(
+      `.js-added-to-cart-${productId}`
+    );
+    addedToCartmsgEL.classList.add("visible");
+    const msgId = setTimeout(() => {
+      addedToCartmsgEL.classList.remove("visible");
+    }, 2000);
+
+    addToCart(productId, productQuantity);
+    updateCartQuantity();
+  });
+});
