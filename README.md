@@ -1,0 +1,1 @@
+this is a simple amazon clone website with some feature of amazon.com
