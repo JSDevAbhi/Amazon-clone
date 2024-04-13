@@ -51,3 +51,15 @@ export function removeFromCart(productId) {
   // updating the cart
   saveToLocalStorage();
 }
+
+export function updateCartQuantity() {
+  let cartQuantiy = 0;
+
+  cart.forEach((cartItem) => {
+    cartQuantiy += cartItem.productQuantity;
+  });
+  if(!document.querySelector(".js-cart-quantity")){
+    return cartQuantiy;
+  }
+  document.querySelector(".js-cart-quantity").innerHTML = cartQuantiy;
+}
