@@ -66,3 +66,16 @@ export function updateCartQuantity() {
   }
   document.querySelector(".js-cart-quantity").innerHTML = cartQuantiy;
 }
+
+export function updateDelivaryOption(productId, delivaryOptionId){
+  let matchingProduct;
+    // checking if product already exists in cart
+    cart.forEach((cartItem) => {
+      if (cartItem.productId === productId) {
+        matchingProduct = cartItem;
+      }
+    });
+  matchingProduct.delivaryOptionId = delivaryOptionId;
+
+  saveToLocalStorage();
+}
