@@ -1,8 +1,8 @@
 import { cart, removeFromCart, updateCartQuantity, updateDelivaryOption } from "../../data/cart.js";
-import { products } from "../../data/products.js";
+import { products, getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
-import { delivaryOptionns } from "../../data/delivaryOptions.js";
+import { delivaryOptionns, getDelivaryOption } from "../../data/delivaryOptions.js";
 
 const updateCheckoutProductQuantity = () => {
   document.querySelector(".js-cart-quantiy").textContent = `${
@@ -18,22 +18,12 @@ export function renderOrderSummary(){
   cart.forEach((cartItem) => {
     const { productId, productQuantity } = cartItem;
 
-    let matchingProduct;
-    products.forEach((product) => {
-      if (product.id === productId) {
-        matchingProduct = product;
-      }
-    });
-
-
+    const matchingProduct = getProduct(productId);
+    
+    
     const delivaryOptionId = cartItem.delivaryOptionId;
-    let delivaryOption;
-
-    delivaryOptionns.forEach(( option ) =>{
-    if(option.id === delivaryOptionId) {
-        delivaryOption = option;
-    }
-    });
+    
+    let delivaryOption = getDelivaryOption(delivaryOptionId);
     
     const today = dayjs();
     const delivaryDate = today.add(delivaryOption.delivaryDays, 'days');
