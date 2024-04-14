@@ -2,6 +2,8 @@ import { cart } from "../../data/cart.js";
 import { getDelivaryOption } from "../../data/delivaryOptions.js";
 import { getProduct, products } from "../../data/products.js";
 import {formatCurrency} from "../utils/money.js";
+
+
 export function renderPaymentSummary() {
   let productPriceCents = 0;
   let shippingPriceCents = 0;
