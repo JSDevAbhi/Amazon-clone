@@ -96,5 +96,5 @@ cart.loadFormStorage();
 const businessCart = Cart('cart-business');
 
 businessCart.loadFormStorage();
-console.log(cart);
+// console.log(cart);
 
